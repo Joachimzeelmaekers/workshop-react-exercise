@@ -8,38 +8,37 @@ const INTERVAL = 10;
 function Stopwatch() {
   const [timeStarted, setTimeStarted] = useState();
   const [currentTime, setCurrentTime] = useState();
-
-  const [isStarted, setIsStarted] = useState(false);
-
   const [savedCurrentTime, setSavedCurrentTime] = useState();
   const [savedTimeStarted, setSavedTimeStarted] = useState();
-
+  const [isStarted, setIsStarted] = useState(false);
   const [savedLaps, setSavedLaps] = useState([]);
-
   const timerRef = useRef();
 
   useEffect(() => {
-    if (isStarted) {
-      if (savedCurrentTime) {
-        setTimeStarted(savedTimeStarted);
-      } else {
-        setTimeStarted(new Date());
-      }
-      timerRef.current = setInterval(() => {
-        if (savedCurrentTime) {
-          const milliSeconds = savedCurrentTime.getMilliseconds();
-          setCurrentTime(
-            new Date(savedCurrentTime.setMilliseconds(milliSeconds + INTERVAL)),
-          );
-        } else {
-          setCurrentTime(new Date());
-        }
-      }, INTERVAL);
-
-      return () => {
-        clearInterval(timerRef.current);
-      };
+    if (!isStarted) {
+      return;
     }
+
+    if (savedCurrentTime) {
+      setTimeStarted(savedTimeStarted);
+    } else {
+      setTimeStarted(new Date());
+    }
+
+    timerRef.current = setInterval(() => {
+      if (savedCurrentTime) {
+        const milliSeconds = savedCurrentTime.getMilliseconds();
+        setCurrentTime(
+          new Date(savedCurrentTime.setMilliseconds(milliSeconds + INTERVAL)),
+        );
+      } else {
+        setCurrentTime(new Date());
+      }
+    }, INTERVAL);
+
+    return () => {
+      clearInterval(timerRef.current);
+    };
   }, [
     isStarted,
     savedTimeStarted,
@@ -59,7 +58,7 @@ function Stopwatch() {
   }, [savedLaps]);
 
   const toggleIsStarted = () => {
-    setIsStarted(!isStarted);
+    setIsStarted((prevState) => !prevState);
   };
 
   const resetTimer = () => {
@@ -134,9 +133,9 @@ function Stopwatch() {
           </div>
         </div>
         <div data-testid="laps-container" style={{height: '200px'}}>
-          {laps.map((lap) => {
-            return <Lap lap={lap} key={`lap-${lap.number}`} />;
-          })}
+          {laps.map((lap) => (
+            <Lap lap={lap} key={`lap-${lap.number}`} />
+          ))}
         </div>
       </div>
     </div>

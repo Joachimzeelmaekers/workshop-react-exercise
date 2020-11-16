@@ -8,7 +8,7 @@ const LAP_STYLE = {
   padding: '0.2em',
 };
 
-function Lap({lap}) {
+const Lap = ({lap}) => {
   if (!lap) {
     return 'Lap is undefined.';
   }
@@ -19,6 +19,6 @@ function Lap({lap}) {
       <p>{lap.value}</p>
     </div>
   );
-}
+};
 
 export default Lap;
