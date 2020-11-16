@@ -12,6 +12,7 @@ function App() {
       <Nav />
       <Switch>
         <Route exact path="/" component={Clock} />
+        <Route path="/stopwatch" component={Stopwatch} />
       </Switch>
     </div>
   );
