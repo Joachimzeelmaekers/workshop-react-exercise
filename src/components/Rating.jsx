@@ -12,7 +12,7 @@ function Rating({rating, showId}) {
   return (
     <div className="flex items-center mt-1">
       {stars.map((star, index) => {
-        return <Star filled={star} />;
+        return <Star filled={star} key={`star-${showId}-${index}`} />;
       })}
     </div>
   );
