@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from 'react';
+import React, {useEffect, useState} from 'react';
 import Card from '../../components/Card';
 import Search from '../../components/Search';
 
