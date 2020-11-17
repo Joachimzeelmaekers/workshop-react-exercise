@@ -13,6 +13,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Clock} />
         <Route path="/stopwatch" component={Stopwatch} />
+        <Route path="/shows" component={ShowsOverview} />
       </Switch>
     </div>
   );
